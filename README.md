@@ -5,7 +5,7 @@ lunar
 
 代码基于 https://github.com/chaseey/lunar 项目；
 
-使用前请先安装：
+依赖了lunardate，使用前请先安装：
 > pip install lunardate
 
 修正了时间地支不显示的问题；
