@@ -149,10 +149,11 @@ def getHourGanzhi(dt,num=False):
         return ""
     #计算时刻的干支编号
     hours = delta.days*24 + delta.seconds/3600
-    ganNum  = (startGanzhi + hours/2)%10
+    ganNum  = int((startGanzhi + hours/2)%10)
+    zhiNum = int((startGanzhi + hours/2)%12)
     if num: # 返回数字形式
         return (ganNum+1,getHourZhi(dt.hour,num=True))
-    return (TIAN_GAN[ganNum] , getHourZhi(dt.hour))
+    return (TIAN_GAN[ganNum] , DI_ZHI[zhiNum])
 
 
 
@@ -847,9 +848,3 @@ class BazhiDate():
     @property
     def constellation(self):
         return getConstellation(self.dt)
-
-
-
-
-
-
