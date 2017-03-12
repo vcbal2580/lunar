@@ -12,7 +12,3 @@ print (u'属相：',myBZ.shuXiang)
 print (u'大运日期',myBZ.daYun_date)
 print (u'大运生日后',myBZ.daYunAfterBirth)
 print (u'旬空：',myBZ.xunKong_list)
-
-# print (myBZ.naYinList)
-#
-# print u"属相",myBZ.shuXiang
