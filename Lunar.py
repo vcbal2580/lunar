@@ -230,13 +230,13 @@ def getMonthGanzhi(dt,num=False):
             zhiNum = startzhi + index
     ganList = {2:1, 3:2, 4:3, 5:4, 6:5, 7:6, 8:7, 9:8, 10:9, 11:10, 0:11,1:12}
     yg = getYearGanzhi(dt,num=True)[0]
-    ganNum = (yg*2 +ganList[zhiNum])%10
+    ganNum = (yg*2 +ganList[zhiNum-1])%10
     if ganNum == 0:
         ganNum = 10
     ganNum -= 1
     if num:
         return (ganNum+1,zhiNum+1)
-    return (TIAN_GAN[ganNum],DI_ZHI[zhiNum])
+    return (TIAN_GAN[ganNum],DI_ZHI[zhiNum-1])
 
 
 
@@ -280,7 +280,7 @@ def ganzhi2Nayin(gz):
         u"壬子,癸丑":u"桑柘木", u"甲寅,乙卯":u"大溪水", u"丙辰,丁巳":u"沙中土",
         u"戊午,己未":u"天上火", u"庚申,辛酉":u"石榴木", u"壬戌,癸亥":u"大海水"
     }
-    for key,val in nayinDict.iteritems():
+    for key,val in nayinDict.items():
         if gz in key:
             return val
     return ""
@@ -291,15 +291,16 @@ def ganzhi2Nayin(gz):
 
 
 # 阴历月 IN:月份数字
-def getLunarMonth_cn(n,postfix=True):
+def getLunarMonth_cn(n, postfix=True):
     monthList = u"正,二,三,四,五,六,七,八,九,十,十一,腊".split(",")
     res = ""
     try:
         n = int(n)
-        res = monthList[(n-1)]
-    except:pass
+        res = monthList[n-1]  # 使用索引操作
+    except:
+        pass
     if postfix:
-        return res+u"月"
+        return res + u"月"
     return res
 
 def getNum2cn(n):
@@ -307,10 +308,10 @@ def getNum2cn(n):
         n = int(n)
     except:
         return None
-    if n>9 or n < 0:
+    if n > 9 or n < 0:
         return None
-    str = u'零,壹,貳,叁,肆,伍,陆,染,捌,玖'.split(",")
-    return str[n]
+    numList = u'零,壹,貳,叁,肆,伍,陆,染,捌,玖'.split(",")  # 确保使用 split 方法
+    return numList[n]
 
 
 #　阴历日 IN: 天数字
